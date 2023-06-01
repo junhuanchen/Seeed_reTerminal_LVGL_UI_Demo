@@ -28,7 +28,7 @@ LV_FONT_DECLARE(digital_clock)
  *  STATIC PROTOTYPES
  **********************/
 static void assistant_create(lv_obj_t * parent);
-static void debug_create(lv_obj_t * parent);
+static void terminal_create(lv_obj_t * parent);
 static void stats_create(lv_obj_t * parent);
 static void color_changer_create(lv_obj_t * parent);
 
@@ -156,10 +156,10 @@ void demo_reTerminal_UI(void)
     lv_obj_set_style_pad_left(tab_btns, 0, 0);
 
     lv_obj_t * t1 = lv_tabview_add_tab(tv, "Assistant");
-    lv_obj_t * t2 = lv_tabview_add_tab(tv, "Debug");
+    lv_obj_t * t2 = lv_tabview_add_tab(tv, "Terminal");
     lv_obj_t * t3 = lv_tabview_add_tab(tv, "Stats");
     assistant_create(t1);
-    debug_create(t2);
+    terminal_create(t2);
     stats_create(t3);
 
     color_changer_create(tv);
@@ -415,7 +415,7 @@ static void stats_create(lv_obj_t * parent)
 
 }
 
-void debug_create(lv_obj_t * parent)
+void terminal_create(lv_obj_t * parent)
 {
     lv_obj_set_flex_flow(parent, LV_FLEX_FLOW_ROW_WRAP);
 
@@ -440,7 +440,7 @@ void debug_create(lv_obj_t * parent)
     lv_spangroup_set_indent(spans, 20);
     lv_spangroup_set_mode(spans, LV_SPAN_MODE_FIXED);
 
-    sprintf(line, "%s\n", "DEBUG messages will appear here");
+    sprintf(line, "%s\n", "Terminal messages will appear here");
 
     span = lv_spangroup_new_span(spans);
     lv_span_set_text(span, line);
@@ -811,7 +811,7 @@ void system_timer_cb(lv_timer_t * timer)
 
     dsk_pct = get_available_space();
     eth0_num = get_current_network_speed();
-#ifndef DRY_RUN    
+#ifndef DRY_RUN
     light_num = get_light_sensor();
 #else
     light_num = lv_rand(0, 1024);
@@ -822,7 +822,7 @@ void system_timer_cb(lv_timer_t * timer)
 void accelerometer_timer_cb(lv_timer_t * timer)
 {
 
-#ifndef DRY_RUN    
+#ifndef DRY_RUN
     evdev_lis3dh_read(&data);
 
     lv_chart_set_next_value(chart1, x_ser, data.x_val);
