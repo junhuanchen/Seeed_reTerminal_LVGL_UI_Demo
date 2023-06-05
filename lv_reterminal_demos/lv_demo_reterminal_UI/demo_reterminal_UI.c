@@ -450,7 +450,7 @@ void terminal_create(lv_obj_t * parent)
     lv_obj_t * ta = lv_textarea_create(parent);
     lv_textarea_set_one_line(ta, true);
     lv_obj_set_width(ta, lv_pct(100));
-    lv_obj_add_event_cb(ta, ta_event_cb, LV_EVENT_READY, ta);
+    lv_obj_add_event_cb(ta, ta_event_cb, LV_EVENT_ALL, ta);
     lv_obj_add_state(ta, LV_STATE_FOCUSED); /*To be sure the cursor is visible*/
 }
 
@@ -494,7 +494,6 @@ static void color_changer_create(lv_obj_t * parent)
     lv_obj_add_event_cb(btn, color_changer_event_cb, LV_EVENT_ALL, color_cont);
     lv_obj_set_style_shadow_width(btn, 0, 0);
     lv_obj_set_style_bg_img_src(btn, LV_SYMBOL_TINT, 0);
-
 
     lv_obj_set_size(btn, LV_DPX(50), LV_DPX(50));
     lv_obj_align(btn, LV_ALIGN_BOTTOM_RIGHT, -LV_DPX(15), -LV_DPX(15));
